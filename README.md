@@ -12,5 +12,5 @@ Erweitert den Funktionsumfang eines [Teltonika TRB140](https://teltonika-network
 - Service starten. ```/etc/init.d/sms-to-fe2 start```
 
 ## Konfiguration
-- In der main.py muss die IP-Adresse des FE2 Server in der Variable ´´´url´´´ angepasst werden.
-  z.B. ´´´http://192.168.1.231/rest/external/http/alarm/v2´´´
+- In der main.py muss die IP-Adresse des FE2 Server in der Variable ```url``` angepasst werden.
+  z.B. ```http://192.168.1.231/rest/external/http/alarm/v2```
