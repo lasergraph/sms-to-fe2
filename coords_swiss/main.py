@@ -55,7 +55,16 @@ def send_alarm(alarm, url, params):
 			'data': { 
 				'message': [
 					alarm["text"]
-				]
+				],
+				"location": {
+					"coordinate": [
+						params["lat"],
+						params["lon"]
+					],
+					"street": params["street"],
+					"house": params["house"],
+					"city": params["city"]
+					},
 			}
 		}
 

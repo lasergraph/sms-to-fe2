@@ -3,7 +3,7 @@ import requests
 #smsmessage = "18.06.2023 21:58; BMA, in Unterentfelden, Fliederweg 18, Rauch aus dem Dach, 3-Fam Haus"
 #smsmessage = "07.08.2023 10:52; Sprinkler, in Oberentfelden, Industriestrasse 50, Müller Immobileien Betriebszentrale,"
 
-def get_coords(message_raw = str):
+def get_coords(message_raw=str):
     url = "https://api3.geo.admin.ch/rest/services/api/SearchServer?type=locations&searchText="
 
     splitm = message_raw.split(";")
@@ -36,7 +36,7 @@ def get_coords(message_raw = str):
     if not "fuzzy" in content.json():
         c = content.json()['results'][0]
         print("https://www.google.com/maps/search/?api=1&query=" + str(c['attrs']['lat']) + "," + str(c['attrs']['lon']))
-        return params | {"lat": str(c['attrs']['lat']), "lon": str(c['attrs']['lon'])}
+        return params | {"lat": c['attrs']['lat'], "lon": c['attrs']['lon']}
     else:
         return params
 
