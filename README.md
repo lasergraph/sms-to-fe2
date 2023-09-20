@@ -17,7 +17,7 @@ Erweitert den Funktionsumfang eines [Teltonika TRB140](https://teltonika-network
 
 ## Unterstütztes SMS Schema 
 Folgendes SMS Schema wird unterstützt:
-*Datum Zeit*; *Dispositv*, in *Ort*, *Adresse*, *Zusatzinformation 1*, *Zusatzinformation 2*
+- *Datum Zeit*; *Dispositv*, in *Ort*, *Adresse*, *Zusatzinformation 1*, *Zusatzinformation 2*
 Dies entspricht dem SMS Schema wie sie im Kanton Aargau von der KNZ(Kantonale Notrufzentrale) verwendet wird.
 
 ## Ermitteln der Einsatz-Koordinaten
