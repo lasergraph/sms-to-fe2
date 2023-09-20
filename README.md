@@ -23,4 +23,4 @@ Dies entspricht dem SMS Schema wie sie im Kanton Aargau von der KNZ(Kantonale No
 
 ## Ermitteln der Einsatz-Koordinaten
 Für die Schweiz gibt es die Möglichkeit die Koordinaten der enthaltenen Einsatzadresse im [Amtlichen Verzeichnis der Gebäudeadressen](https://www.swisstopo.admin.ch/de/geodata/amtliche-verzeichnisse/gebaeudeadressenverzeichnis.html) abzufragen und an den FE2 Server zu übermitteln.<br>
-Dazu müssen die Python Dateien im Ordner [coords_swiss](coords_swiss) verwendet werden. 
+Dazu müssen die Python Dateien im Ordner [coords_swiss](https://github.com/lasergraph/sms-to-fe2/tree/main/coords_swiss) verwendet werden. 
