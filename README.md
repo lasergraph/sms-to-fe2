@@ -14,3 +14,12 @@ Erweitert den Funktionsumfang eines [Teltonika TRB140](https://teltonika-network
 ## Konfiguration
 - In der main.py muss die IP-Adresse des FE2 Server in der Variable ```url``` angepasst werden.
   z.B. ```http://192.168.1.231/rest/external/http/alarm/v2```
+
+## Unterstütztes SMS Schema 
+Folgendes SMS Schema wird unterstützt:
+*Datum Zeit*; *Dispositv*, in *Ort*, *Adresse*, *Zusatzinformation 1*, *Zusatzinformation 2*
+Dies entspricht dem SMS Schema wie sie im Kanton Aargau von der KNZ(Kantonale Notrufzentrale) verwendet wird.
+
+## Ermitteln der Einsatz-Koordinaten
+Für die Schweiz gibt es die Möglichkeit die Koordinaten der enthaltenen Einsatzadresse im [Amtlichen Verzeichnis der Gebäudeadressen](https://www.swisstopo.admin.ch/de/geodata/amtliche-verzeichnisse/gebaeudeadressenverzeichnis.html) abzufragen und an den FE2 Server zu übermitteln.
+Dazu müssen die Python Dateien im Ordner coords_swiss verwendet werden. 
