@@ -1,5 +1,8 @@
 import requests
 
+
+sms = "22.09.2023 18:21; Verkehrsregelung, in Suhr, Wältimattweg, VU, Strassensperrung"
+
 def get_coords(message_raw=str):
     url = "https://api3.geo.admin.ch/rest/services/api/SearchServer?type=locations&searchText="
 
@@ -16,9 +19,13 @@ def get_coords(message_raw=str):
         incity = message[2].lstrip()
         city = incity.split(" ")[1]
         address_all = message[3].lstrip()
-        address = address_all.split(" ")
-        street = address[0].lstrip()
-        house = address[1].lstrip()
+        if " " in address_all:
+            address = address_all.split(" ")
+            street = address[0].lstrip()
+            house = address[1].lstrip()
+        else:
+            street = address_all
+            house = ""
         if len(message) >= 5:
             add1 = message[4].lstrip()
         else:
@@ -37,9 +44,13 @@ def get_coords(message_raw=str):
         incity = message[1].lstrip()
         city = incity.split(" ")[1]
         address_all = message[2].lstrip()
-        address = address_all.split(" ")
-        street = address[0].lstrip()
-        house = address[1].lstrip()
+        if " " in address_all:
+            address = address_all.split(" ")
+            street = address[0].lstrip()
+            house = address[1].lstrip()
+        else:
+            street = address_all
+            house = ""
         if len(message) >= 4:
             add1 = message[3].lstrip()
         else:
@@ -60,3 +71,5 @@ def get_coords(message_raw=str):
         return params | {"lat": c['attrs']['lat'], "lon": c['attrs']['lon']}
     else:
         return params
+    
+print(get_coords(sms))
