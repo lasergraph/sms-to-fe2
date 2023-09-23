@@ -1,8 +1,6 @@
 import requests
 
 
-sms = "22.09.2023 18:21; Verkehrsregelung, in Suhr, Wältimattweg, VU, Strassensperrung"
-
 def get_coords(message_raw=str):
     url = "https://api3.geo.admin.ch/rest/services/api/SearchServer?type=locations&searchText="
 
@@ -71,5 +69,3 @@ def get_coords(message_raw=str):
         return params | {"lat": c['attrs']['lat'], "lon": c['attrs']['lon']}
     else:
         return params
-    
-print(get_coords(sms))
