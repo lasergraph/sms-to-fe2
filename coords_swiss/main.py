@@ -62,8 +62,7 @@ def get_new_sms():
 # Senden des Alarms an Server via HTTP POST Request
 def send_alarm(alarm, url, params):
 	#POST Request erstellen
-	dispo = check_dispo(alarm["text"])
-	if "lat" in params and dispo:
+	if "lat" in params:
 		# Koordinaten im Gebäudeverziechnis gefunden 
 		request_data = { 
 			'type': "ALARM",
@@ -108,7 +107,9 @@ while True:
 	if new_sms:
 		alarm = get_new_sms() #Neue SMS abrufen
 		subprocess.check_output(["gsmctl", "-S", "-d", "0"]) #SMS löschen
-		params = coords.get_coords(alarm["text"]) #Koordinaten abrufen 
+		dispo = check_dispo(alarm["text"])
+		if dispo:
+			params = coords.get_coords(alarm["text"]) #Koordinaten abrufen 
 		send_alarm(alarm, url, params) #Alarm an FE2 senden
 		
 	time.sleep(1) 
