@@ -1,6 +1,5 @@
 import requests
 
-
 def get_coords(message_raw=str):
     url = "https://api3.geo.admin.ch/rest/services/api/SearchServer?type=locations&searchText="
 
@@ -11,6 +10,7 @@ def get_coords(message_raw=str):
     time = dateandtime[1].lstrip()
     #Meldung splitten
     message = splitm[1].split(",")
+    print(message)
     if message[0].lstrip() == "Nachalarmierung":
         # Meldung ist eine Nachalarmierung
         dispo = message[0].lstrip() + ", " + message[1].lstrip() 

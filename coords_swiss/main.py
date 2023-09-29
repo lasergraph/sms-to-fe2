@@ -6,6 +6,22 @@ import coords
 
 #Variabeln
 url = "http://192.168.1.231/rest/external/http/alarm/v2"
+dispositiv = ["BMA", "Brand-Klein", "Brand-Mittel", "Brand-Gross", "Elementarereignis", "Oel-, Benzin-, Chemie", "Techn. Hilfeleistung", "Verkehrsregelung", "Stützpunkt", "Nachalarmierung", "Strassenrettung", "NTP Inbetriebnahme", "Sprinkler"]
+city = ["Oberentfelden", "Unterentfelden", "Muhen", "Aarau", "Kölliken", "Hirschthal", "Schöftland", "Holziken", "Unterkulm", "Gränichen", "Suhr", "Buchs"]
+
+#Prüfen ob Ortsnamen im Alarmtext vorhanden
+def check_city(test):
+    for c in city:
+        if c in test:
+            return True
+    return False
+        
+#Prüfen ob Dispositiv Alarmtext vorhanden      
+def check_dispo(test):
+    for c in dispositiv:
+        if c in test:
+            return True
+    return False
 
 #Prüfen ob SMS vorhanden sind.
 def get_sms_used():
@@ -46,7 +62,8 @@ def get_new_sms():
 # Senden des Alarms an Server via HTTP POST Request
 def send_alarm(alarm, url, params):
 	#POST Request erstellen
-	if "lat" in params:
+	dispo = check_dispo(alarm["text"])
+	if "lat" in params and dispo:
 		# Koordinaten im Gebäudeverziechnis gefunden 
 		request_data = { 
 			'type': "ALARM",
