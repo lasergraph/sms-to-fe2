@@ -10,14 +10,14 @@ dispositiv = ["BMA", "Brand-Klein", "Brand-Mittel", "Brand-Gross", "Elementarere
 city = ["Oberentfelden", "Unterentfelden", "Muhen", "Aarau", "Kölliken", "Hirschthal", "Schöftland", "Holziken", "Unterkulm", "Gränichen", "Suhr", "Buchs"]
 
 #Prüfen ob Ortsnamen im Alarmtext vorhanden
-def check_city(test: str):
+def check_city(test: str, city: list):
     for c in city:
         if c in test:
             return True
     return False
         
 #Prüfen ob Dispositiv Alarmtext vorhanden      
-def check_dispo(test: str):
+def check_dispo(test: str, dispositiv:list):
     for c in dispositiv:
         if c in test:
             return True
@@ -109,7 +109,7 @@ while True:
 	new_sms = get_sms_used() #Prüfen auf neue SMS
 	if new_sms:
 		alarm = get_new_sms() #Neue SMS abrufen
-		dispo = check_dispo(alarm["text"])
+		dispo = check_dispo(alarm["text"], dispositiv)
 		if dispo:
 			params = coords.get_coords(alarm["text"]) #Koordinaten abrufen
 			if "lat" in params: 
