@@ -10,14 +10,14 @@ dispositiv = ["BMA", "Brand-Klein", "Brand-Mittel", "Brand-Gross", "Elementarere
 city = ["Oberentfelden", "Unterentfelden", "Muhen", "Aarau", "Kölliken", "Hirschthal", "Schöftland", "Holziken", "Unterkulm", "Gränichen", "Suhr", "Buchs"]
 
 #Prüfen ob Ortsnamen im Alarmtext vorhanden
-def check_city(test):
+def check_city(test: str):
     for c in city:
         if c in test:
             return True
     return False
         
 #Prüfen ob Dispositiv Alarmtext vorhanden      
-def check_dispo(test):
+def check_dispo(test: str):
     for c in dispositiv:
         if c in test:
             return True
@@ -58,60 +58,68 @@ def get_new_sms():
 			text = s.split("\t")[2]
 			
 	return {"timestamp": timestamp, "sender": sender, "status": status, "text": text}
-	
-# Senden des Alarms an Server via HTTP POST Request
-def send_alarm(alarm, url, params):
-	#POST Request erstellen
-	if "lat" in params:
-		# Koordinaten im Gebäudeverziechnis gefunden 
-		request_data = { 
-			'type': "ALARM",
-			'timestamp': alarm["timestamp"],
-			'sender': alarm["sender"],
-			'authorization': alarm["sender"],
-			'data': { 
-				'message': [
-					alarm["text"]
-				],
-				"location": {
-					"coordinate": [
-						params["lon"],
-						params["lat"]
-					],
-					"street": params["street"],
-					"house": params["house"],
-					"city": params["city"]
-					},
-			}
-		}
 
-	else:
-		# Fallback ohne Koordinaten
-		request_data = { 
-			'type': "ALARM",
-			'timestamp': alarm["timestamp"],
-			'sender': alarm["sender"],
-			'authorization': alarm["sender"],
-			'data': { 
-				'message': [
-					alarm["text"]
-				]
-			}
+# Senden des Alarms ohne Koordinaten an Server via HTTP POST Request
+def send_alarm_fallback(alarm: dict, url: str):
+	# Fallback ohne Koordinaten
+	request_data = { 
+		'type': "ALARM",
+		'timestamp': alarm["timestamp"],
+		'sender': alarm["sender"],
+		'authorization': alarm["sender"],
+		'data': { 
+			'message': [
+				alarm["text"]
+			]
 		}
+	}
 	#Senden Request an FE2 Server
 	r = requests.post(url, json = request_data)
+	return r
 
+# Senden des Alarms mit Koordinaten an Server via HTTP POST Request
+def send_alarm_coord(alarm: dict, url: str, params: dict):
+	# Koordinaten im Gebäudeverziechnis gefunden 
+	request_data = { 
+		'type': "ALARM",
+		'timestamp': alarm["timestamp"],
+		'sender': alarm["sender"],
+		'authorization': alarm["sender"],
+		'data': { 
+			'message': [
+				alarm["text"]
+			],
+			"location": {
+				"coordinate": [
+					params["lon"],
+					params["lat"]
+				],
+				"street": params["street"],
+				"house": params["house"],
+				"city": params["city"]
+				},
+		}
+	}
+	#Senden Request an FE2 Server
+	r = requests.post(url, json = request_data)
+	return r
 
+# Main while Loop
 while True:
 	new_sms = get_sms_used() #Prüfen auf neue SMS
 	if new_sms:
 		alarm = get_new_sms() #Neue SMS abrufen
-		subprocess.check_output(["gsmctl", "-S", "-d", "0"]) #SMS löschen
-		params = {}
 		dispo = check_dispo(alarm["text"])
 		if dispo:
-			params = coords.get_coords(alarm["text"]) #Koordinaten abrufen 
-		send_alarm(alarm, url, params) #Alarm an FE2 senden
+			params = coords.get_coords(alarm["text"]) #Koordinaten abrufen
+			if "lat" in params: 
+				send_alarm_coord(alarm, url, params) #Alarm mit Koordinaten an FE2 senden
+			else:
+				send_alarm_fallback(alarm, url) #Alarm Koordinaten an FE2 senden
+		else:
+			send_alarm_fallback(alarm, url) #Alarm ohne Dispo und Koordinaten an FE2 senden 
+
+		subprocess.check_output(["gsmctl", "-S", "-d", "0"]) #SMS löschen
 		
 	time.sleep(1) 
 
