@@ -107,6 +107,7 @@ while True:
 	if new_sms:
 		alarm = get_new_sms() #Neue SMS abrufen
 		subprocess.check_output(["gsmctl", "-S", "-d", "0"]) #SMS löschen
+		params = {}
 		dispo = check_dispo(alarm["text"])
 		if dispo:
 			params = coords.get_coords(alarm["text"]) #Koordinaten abrufen 
