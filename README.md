@@ -2,7 +2,7 @@
 Erweitert den Funktionsumfang eines [Teltonika TRB140](https://teltonika-networks.com/products/gateways/trb140) Gateway das Eingehende SMS als Alarm über die Externe Schnittstelle an einen Alamos FE2 Server gesendet werden können.
 
 ## Installation 
-- main.py auf TRB140 in Ordner /root/ speichern.(sFTP)
+- [basic/main.py](basic/main.py) auf TRB140 in Ordner /root/ speichern.(sFTP)
 - sms-to-fe2 auf TRB140 in Ordner /etc/init.d/ speichern.(sFTP)
 - sms-to-fe2 ausführbar machen ```chmod +x /etc/init.d/sms-to-fe2```
 - Sonderzeichen entfernen. ```sed -i -e 's/\r//g' /etc/init.d/sms-to-fe2```
