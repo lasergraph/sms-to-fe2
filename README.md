@@ -7,7 +7,7 @@ Erweitert den Funktionsumfang eines [Teltonika TRB140](https://teltonika-network
 - sms-to-fe2 ausführbar machen ```chmod +x /etc/init.d/sms-to-fe2```
 - Sonderzeichen entfernen. ```sed -i -e 's/\r//g' /etc/init.d/sms-to-fe2```
 - PiP installieren. ```opkg install python3-pip```
-- Pythonmodule Requests und DateTime installieren. ```pip install reguests datetime``` 
+- Pythonmodule Requests und DateTime installieren. ```pip install requests datetime``` 
 - Service aktivieren. ```/etc/init.d/sms-to-fe2 enable```
 - Service starten. ```/etc/init.d/sms-to-fe2 start```
 
