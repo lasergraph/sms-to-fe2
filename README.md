@@ -31,7 +31,8 @@ Danach muss ein ```okpg update``` ausgeführt werden um die Paketquellen zu aktu
 ## Konfiguration
 - In der main.py muss die IP-Adresse des FE2 Server in der Variable ```url``` angepasst werden.
   z.B. ```http://192.168.1.231:83/rest/external/http/alarm/v2```
-Es wird der Port verwendet über den die Weboberfäche erreichbar ist
+
+Es wird der Port verwendet über den die Weboberfäche erreichbar ist.
 
 ## Ermitteln der Einsatz-Koordinaten
 Für die Schweiz gibt es die Möglichkeit die Koordinaten der enthaltenen Einsatzadresse im [Amtlichen Verzeichnis der Gebäudeadressen](https://www.swisstopo.admin.ch/de/geodata/amtliche-verzeichnisse/gebaeudeadressenverzeichnis.html) abzufragen und an den FE2 Server zu übermitteln.<br>
