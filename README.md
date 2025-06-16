@@ -28,7 +28,7 @@ src/gz openwrt_vuci https://downloads.openwrt.org/releases/21.02.0/packages/arm_
 ```
 Danach muss ein ```opkg update``` ausgeführt werden um die Paketquellen zu aktualisieren. Danach kann Pip über die Paketquellen installiert werden.
 
-Bei Problemen mit der Python PIP Installation über opkg kann folgender Workaround helfen:
+Bei Problemen mit der Python PIP Installation über opkg kann folgender Workaround helfen ([Quelle](https://community.teltonika.lt/t/trb140-python-pip-work-around/9202)):
 ```
 opkg remove python3-pip
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
