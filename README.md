@@ -58,7 +58,8 @@ Dies entspricht dem SMS Schema wie sie im Kanton Aargau von der KNZ(Kantonale No
 ### Konfiguration TRB140 mit SIM ohne Datenoption ###
 Das TRB140 leitet den Internetverkehr über das WAN. In der Default Konfiguration ist die WAN Verbindung über die SIM-Karte. Wird eine SIM-Karte ohne Datenoption verwendet muss ein weiters WAN Netzwerk hinzugefügt werden, welches den LAN Port verwendet. Dies wird über die TRB140 Konfigurationsseite gemacht:
 - Network > WAN > Add
-- Statische IP (nicht die gleiche Adresse wie beim LAN Port verwenden), sowie Gateway Adresse (z.B. 192.168.118.2) konfigurieren.
+-- General Settings: Statische IP (nicht die gleiche Adresse wie beim LAN Port verwenden), sowie Gateway Adresse (z.B. 192.168.118.2) konfigurieren.
+-- More > Physical Settings > Interface: br-lan (etho)
 - Die Konfigurationsseite ist weiterhin über die IP Adresse welche unter LAN definiert wurde erreichbar.
 
 
