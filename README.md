@@ -26,7 +26,18 @@ src/gz openwrt_routing https://downloads.openwrt.org/releases/21.02.0/packages/a
 src/gz openwrt_telephony https://downloads.openwrt.org/releases/21.02.0/packages/arm_cortex-a7_neon-vfpv4/telephony
 src/gz openwrt_vuci https://downloads.openwrt.org/releases/21.02.0/packages/arm_cortex-a7_neon-vfpv4/vuci
 ```
-Danach muss ein ```okpg update``` ausgeführt werden um die Paketquellen zu aktualisieren. Danach kann Pip über die Paketquellen installiert werden.
+Danach muss ein ```opkg update``` ausgeführt werden um die Paketquellen zu aktualisieren. Danach kann Pip über die Paketquellen installiert werden.
+
+Bei Problemen mit der Python PIP Installation über opkg kann folgender Workaround helfen:
+```
+opkg remove python3-pip
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python get-pip.py
+```
+Danach können die Python Module über PIP installiert werden
+```
+pip install requests
+```
 
 ## Konfiguration
 - In der main.py muss die IP-Adresse des FE2 Server in der Variable ```url``` angepasst werden.
@@ -43,3 +54,11 @@ Folgendes SMS Schema wird für die Ermittlung von Koordinaten unterstützt:<br>
 - *Datum Zeit*; *Dispositv*, in *Ort*, *Adresse*, *Zusatzinformation 1*, *Zusatzinformation 2*<br>
 
 Dies entspricht dem SMS Schema wie sie im Kanton Aargau von der KNZ(Kantonale Notrufzentrale) verwendet wird.
+
+### Konfiguration TRB140 mit SIM ohne Datenoption ###
+Das TRB140 leitet den Internetverkehr über das WAN. In der Default Konfiguration ist die WAN Verbindung über die SIM-Karte. Wird eine SIM-Karte ohne Datenoption verwendet muss ein weiters WAN Netzwerk hinzugefügt werden, welches den LAN Port verwendet. Dies wird über die TRB140 Konfigurationsseite gemacht:
+- Network > WAN > Add
+- Statische IP (nicht die gleiche Adresse wie beim LAN Port verwenden), sowie Gateway Adresse (z.B. 192.168.118.2) konfigurieren.
+- Die Konfigurationsseite ist weiterhin über die IP Adresse welche unter LAN definiert wurde erreichbar.
+
+
